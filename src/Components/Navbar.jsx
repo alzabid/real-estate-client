@@ -9,7 +9,7 @@ const Navbar = () => {
   const handleClick = () => setClick(!click);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar container">
       <div className="nav-container">
         <NavLink exact to="/" className="nav-logo">
           <span>Real Estate</span>
