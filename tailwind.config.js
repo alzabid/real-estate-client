@@ -6,7 +6,16 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["emerald"],
+    // themes: ["emerald"],
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "teal",
+          secondary: "#f5b921",
+        },
+      },
+    ],
   },
 };
 
