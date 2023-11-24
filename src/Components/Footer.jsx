@@ -8,7 +8,7 @@ const Footer = () => {
         <Link to="/" className="">
           <p className="text-secondary text-2xl">Real Estate</p>
         </Link>
-        <p className=" lg:w-[700px] md:text-justify">
+        <p className="md:w-[300px] lg:w-[700px] lg:text-justify">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque at
           alias mollitia culpa fugit eaque facilis architecto omnis eveniet
           officiis, perferendis recusandae dolorem aliquid animi ipsa neque a
@@ -69,9 +69,7 @@ const Footer = () => {
       </nav>
       <nav>
         <div className="space-y-2">
-          <h1 className="text-xl text-secondary mb-2">
-            Contact Information
-          </h1>
+          <h1 className="text-xl text-secondary mb-2">Contact Information</h1>
           <p className="font-medium">Sector-7,Uttra, Dhaka 1212.</p>
           <p className="font-medium">+019 123 456 78</p>
           <p className="font-medium">info@cleanco.com</p>

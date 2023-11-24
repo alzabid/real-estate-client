@@ -12,9 +12,10 @@ const Navbar = () => {
     <nav className="navbar container">
       <div className="nav-container">
         <NavLink exact to="/" className="nav-logo">
+          <span className="icon">
+            <img src="/img/fav.png" alt="" />
+          </span>
           <span>Real Estate</span>
-
-          <span className="icon">{/* <CgHome/> */}</span>
         </NavLink>
 
         <ul className={click ? "nav-menu active" : "nav-menu"}>
@@ -43,23 +44,23 @@ const Navbar = () => {
           <li className="nav-item">
             <NavLink
               exact
-              to="/blog"
+              to="/register"
               activeClassName="active"
               className="nav-links"
               onClick={handleClick}
             >
-              Blog
+              Register
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
               exact
-              to="/contact"
+              to="/login"
               activeClassName="active"
               className="nav-links"
               onClick={handleClick}
             >
-              Contact Us
+              Login
             </NavLink>
           </li>
         </ul>
