@@ -12,6 +12,13 @@ body{
     overflow-x: hidden;
 }
 
+h2,h3,h4,.logo{
+  font-family: 'Mooli', sans-serif;
+}
+
+.button{
+  @apply p-3  border-black hover:border-secondary border-2 rounded-full hover:text-white hover:bg-secondary transition-all duration-200 hover:shadow backdrop-blur-lg shadow-inner shadow-black
+}
 
 .container{
   @apply max-w-screen-2xl mx-auto

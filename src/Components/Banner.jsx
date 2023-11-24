@@ -34,12 +34,16 @@ const Banner = () => {
     >
       <SwiperSlide>
         <div className="relative w-full">
-          <img className="h-[90vh] w-screen " src="/img/2.jpg" alt="" />
-          <div className="absolute rounded-xl flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
+          <img
+            className="h-[70vh] md:h-[90vh] w-screen "
+            src="/img/2.jpg"
+            alt=""
+          />
+          <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
             <div className="text-white space-y-7 px-10 lg:pl-12 w-full md:w-1/2">
-              <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">
                 Discover Your Dream Home Today
-              </h2>
+              </h1>
               <p className="text-xs lg:text-base text-justify">
                 Welcome to Real Estate, where exceptional living begins. Explore
                 our curated collection of homes, each a unique sanctuary waiting
@@ -63,12 +67,16 @@ const Banner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div className="relative w-full">
-          <img className="h-[90vh] w-screen " src="/img/3.jpg" alt="" />
-          <div className="absolute rounded-xl flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
+          <img
+            className="h-[70vh] md:h-[90vh] w-screen "
+            src="/img/3.jpg"
+            alt=""
+          />
+          <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
             <div className="text-white space-y-7 px-10 lg:pl-12 w-full md:w-1/2">
-              <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">
                 Discover Your Dream Home Today
-              </h2>
+              </h1>
               <p className="text-xs lg:text-base text-justify">
                 Welcome to Real Estate, where exceptional living begins. Explore
                 our curated collection of homes, each a unique sanctuary waiting
@@ -79,7 +87,9 @@ const Banner = () => {
                 an address.
               </p>
               <div>
-                <button className="btn btn-sm md:btn-md btn-primary mr-5">Discover More</button>
+                <button className="btn btn-sm md:btn-md btn-primary mr-5">
+                  Discover More
+                </button>
                 <button className="btn btn-sm md:btn-md btn-outline btn-secondary">
                   Latest Project
                 </button>
@@ -90,12 +100,16 @@ const Banner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div className="relative w-full">
-          <img className="h-[90vh] w-screen " src="/img/1.jpg" alt="" />
-          <div className="absolute rounded-xl flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
+          <img
+            className="h-[70vh] md:h-[90vh] w-screen "
+            src="/img/1.jpg"
+            alt=""
+          />
+          <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
             <div className="text-white space-y-7 px-10 lg:pl-12 w-full md:w-1/2">
-              <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">
                 Discover Your Dream Home Today
-              </h2>
+              </h1>
               <p className="text-xs lg:text-base text-justify">
                 Welcome to Real Estate, where exceptional living begins. Explore
                 our curated collection of homes, each a unique sanctuary waiting
@@ -106,7 +120,9 @@ const Banner = () => {
                 an address.
               </p>
               <div>
-                <button className="btn btn-sm md:btn-md btn-primary mr-5">Discover More</button>
+                <button className="btn btn-sm md:btn-md btn-primary mr-5">
+                  Discover More
+                </button>
                 <button className="btn btn-sm md:btn-md btn-outline btn-secondary">
                   Latest Project
                 </button>
@@ -117,12 +133,16 @@ const Banner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div className="relative w-full">
-          <img className="h-[90vh] w-screen " src="/img/4.jpg" alt="" />
-          <div className="absolute rounded-xl flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
+          <img
+            className="h-[70vh] md:h-[90vh] w-screen "
+            src="/img/4.jpg"
+            alt=""
+          />
+          <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
             <div className="text-white space-y-7 px-10 lg:pl-12 w-full md:w-1/2">
-              <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">
                 Discover Your Dream Home Today
-              </h2>
+              </h1>
               <p className="text-xs lg:text-base text-justify">
                 Welcome to Real Estate, where exceptional living begins. Explore
                 our curated collection of homes, each a unique sanctuary waiting
@@ -133,7 +153,9 @@ const Banner = () => {
                 an address.
               </p>
               <div>
-                <button className="btn btn-sm md:btn-md btn-primary mr-5">Discover More</button>
+                <button className="btn btn-sm md:btn-md btn-primary mr-5">
+                  Discover More
+                </button>
                 <button className="btn btn-sm md:btn-md btn-outline btn-secondary">
                   Latest Project
                 </button>
@@ -144,12 +166,16 @@ const Banner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div className="relative w-full">
-          <img className="h-[90vh] w-screen " src="/img/5.jpg" alt="" />
-          <div className="absolute rounded-xl flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
+          <img
+            className="h-[70vh] md:h-[90vh] w-screen "
+            src="/img/5.jpg"
+            alt=""
+          />
+          <div className="absolute flex items-center h-full left-0 top-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)]">
             <div className="text-white space-y-7 px-10 lg:pl-12 w-full md:w-1/2">
-              <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold">
+              <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">
                 Discover Your Dream Home Today
-              </h2>
+              </h1>
               <p className="text-xs lg:text-base text-justify">
                 Welcome to Real Estate, where exceptional living begins. Explore
                 our curated collection of homes, each a unique sanctuary waiting
@@ -160,7 +186,9 @@ const Banner = () => {
                 an address.
               </p>
               <div>
-                <button className="btn btn-sm md:btn-md btn-primary mr-5">Discover More</button>
+                <button className="btn btn-sm md:btn-md btn-primary mr-5">
+                  Discover More
+                </button>
                 <button className="btn btn-sm md:btn-md btn-outline btn-secondary">
                   Latest Project
                 </button>

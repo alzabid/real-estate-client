@@ -10,10 +10,10 @@ const About = () => {
         />
       </div>
       <div className="md:w-[50%] p-8 lg:p-20 space-y-4">
-        <h1 className="text-2xl">About Us</h1>
-        <h1 className=" text-2xl lg:text-4xl">
+        <h2 className="text-2xl">About Us</h2>
+        <h2 className=" text-2xl lg:text-4xl">
           Your journey to the perfect home begins with us.{" "}
-        </h1>
+        </h2>
         <p className="text-xs lg:text-base text-justify">
           From cozy starter homes to luxurious estates, we connect you with the
           perfect property to call your own. Your dream home is just a click
