@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import Lottie from "lottie-react";
 import loginAnimation from "../assets/loginAnimation.json"
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
@@ -64,7 +65,10 @@ const Login = () => {
          });
      };
     return (
-      <div className=" bg-[url(/img/bg2.png)] bg-contain container ">
+      <div className=" bg-[url(/img/bg2.png)] bg-contain bg container ">
+        <Helmet>
+          <title>Login</title>
+        </Helmet>
         <div className=" bg-white bg-opacity-90 min-h-screen">
           <div className="w-11/12 mx-auto py-10 m-5 p-5  ">
             <div className="title mt-5">
@@ -121,7 +125,7 @@ const Login = () => {
                   </div>
 
                   <input type="submit" value="Login Now" className="button" />
-                  <div className=" p-1 flex gap-3 -mt-4">
+                  <div className=" flex gap-2 justify-center">
                     New Here? Please
                     <Link to="/register">
                       <p className=" btn-link">Register</p>
@@ -131,15 +135,13 @@ const Login = () => {
                 </form>
 
                 <div className="divider ">Continue With</div>
-                <div className="px-5">
-                  <button
-                    onClick={handleGoogleSignIn}
-                    className=" button w-full flex justify-between items-center cursor-pointer "
-                  >
-                    Log in With Google
-                    <FcGoogle className="w-8 h-6" />
-                  </button>
-                </div>
+                <button
+                  onClick={handleGoogleSignIn}
+                  className=" button w-full flex justify-center items-center gap-5 cursor-pointer "
+                >
+                  Log in With Google
+                  <FcGoogle className="w-8 h-6" />
+                </button>
               </div>
               {/* <Social></Social> */}
               <div className="flex-1 mx-20">

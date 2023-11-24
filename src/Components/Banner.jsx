@@ -30,7 +30,7 @@ const Banner = () => {
       navigation={true}
       keyboard={true}
       modules={[Autoplay, EffectFade, Navigation, Pagination, Keyboard]}
-      className="container"
+      className=""
     >
       <SwiperSlide>
         <div className="relative w-full">

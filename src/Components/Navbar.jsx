@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
 import "../Components/Navbar.css";
+import { NavLink } from "react-router-dom";
 import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
 import { useContext, useState } from "react";

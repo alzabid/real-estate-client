@@ -8,43 +8,30 @@ import { BiEnvelope, BiImageAdd, BiKey, BiUser } from "react-icons/bi";
 import Lottie from "lottie-react";
 import registrationAnimation from "../assets/registrationAnimation.json";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
-  const { createUser, handleUpdateProfile, signInWithGoogle, logOut } =
-    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
   const [registerError, setRegisterError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+  const { createUser, handleUpdateProfile, signInWithGoogle, logOut } =
+    useContext(AuthContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const photo = e.target.photo.value;
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    setRegisterError("");
-
-    if (password.length < 6) {
-      setRegisterError("password should 6 character");
-      return;
-    } else if (
-      !/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=])/.test(password)
-    ) {
-      setRegisterError(
-        "At least one uppercase letter, one lowercase letter, one number and one special character."
-      );
-      return;
-    }
-
-    createUser(email, password)
+  const onSubmit = (data) => {
+    console.log(data);
+    createUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        handleUpdateProfile(name, photo)
+        handleUpdateProfile(data.name, data.photoURL)
           .then(() => {
-            e.target.reset();
             Swal.fire({
               position: "middle",
               icon: "success",
@@ -81,113 +68,159 @@ const Register = () => {
         console.error(error);
       });
   };
+
   return (
-    <div className=" bg-[url(img/bg.png)] bg-contain container">
-      <div className=" bg-white bg-opacity-90 min-h-screen">
-        <div className="w-11/12 mx-auto py-10 m-5 p-5 ">
-          <div className="title mt-5">
-            <Title>Join with Us</Title>
-          </div>
+    <>
+      <Helmet>
+        <title>Register</title>
+      </Helmet>
 
-          <div className="flex flex-col justify-between items-center gap-5 pt-8 lg:flex-row">
-            <div className="login-for flex-1">
-              <form
-                onSubmit={handleRegister}
-                className="flex flex-col gap-8 p-5 backdrop-blur-sm bg-white bg-opacity-5 shadow-lg rounded-lg"
-              >
-                <div className="flex justify-start items-center">
-                  <div className="">
-                    <BiUser className="text-3xl text-slate-500"></BiUser>
-                  </div>
-                  <input
-                    className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
-                    type="text"
-                    name="name"
-                    placeholder="Enter Full Name"
-                    required
-                  />
-                </div>
+      <div className=" bg-[url(img/bg.png)] bg-contain bg container">
+        <div className=" bg-white bg-opacity-90 min-h-screen">
+          <div className="w-11/12 mx-auto py-10 m-5 p-5 ">
+            <div className="title mt-5">
+              <Title>Join with Us</Title>
+            </div>
 
-                <div className="flex justify-start items-center">
-                  <div className="">
-                    <BiImageAdd className="text-3xl text-slate-500"></BiImageAdd>
+            <div className="flex flex-col justify-between items-center gap-5 pt-8 lg:flex-row">
+              <div className="login-for flex-1">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col gap-8 p-5 backdrop-blur-sm bg-white bg-opacity-5 shadow-lg rounded-lg"
+                >
+                  <div className="flex justify-start items-center">
+                    <div className="">
+                      <BiUser className="text-3xl text-slate-500"></BiUser>
+                    </div>
+                    <input
+                      className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
+                      type="text"
+                      placeholder="Enter Full Name"
+                      {...register("name", { required: true })}
+                    />
                   </div>
-                  <input
-                    className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
-                    type="text"
-                    name="photo"
-                    placeholder="Enter Image Url"
-                    required
-                  />
-                </div>
-                <div className="flex justify-start items-center">
-                  <div className="">
-                    <BiEnvelope className="text-3xl text-slate-500"></BiEnvelope>
-                  </div>
-                  <input
-                    className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
-                    type="email"
-                    name="email"
-                    placeholder="Enter Email"
-                    required
-                  />
-                </div>
-
-                <div className="flex justify-start items-center">
-                  <div className="">
-                    <BiKey className="text-3xl text-slate-500"></BiKey>
-                  </div>
-                  <input
-                    className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
-                    type={showPassword ? "password" : "text"}
-                    name="password"
-                    placeholder="Enter Password"
-                    required
-                  />
-                  <span
-                    className="absolute top-[255PX] right-12 link link-hover"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
-                  </span>
-                </div>
-                <div className=" p-1 flex gap-3 -mt-4">
-                  {registerError && (
-                    <p className="text-red-700 text-sm ">{registerError}</p>
+                  {errors.name && (
+                    <p className="text-red-600 text-sm">Name is required</p>
                   )}
-                </div>
 
-                <input type="submit" value="Register Now" className="button" />
-                <div className=" p-1 flex gap-3 -mt-4">
-                  Already have an account? Please
-                  <Link to="/login">
-                    <p className=" btn-link">Login</p>
-                  </Link>
-                  now.
-                </div>
-              </form>
-              <div className="divider ">Continue With</div>
-              <div className="px-5">
+                  <div className="flex justify-start items-center">
+                    <div className="">
+                      <BiImageAdd className="text-3xl text-slate-500"></BiImageAdd>
+                    </div>
+                    <input
+                      className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
+                      type="text"
+                      placeholder="Enter Image Url"
+                      {...register("photoURL", { required: true })}
+                    />
+                  </div>
+                  {errors.photoURL && (
+                    <p className="text-red-600 text-sm">
+                      Photo URL is required
+                    </p>
+                  )}
+                  <div className="flex justify-start items-center">
+                    <div className="">
+                      <BiEnvelope className="text-3xl text-slate-500"></BiEnvelope>
+                    </div>
+                    <input
+                      className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
+                      type="email"
+                      placeholder="Enter Email"
+                      {...register("email", { required: true })}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="text-red-600 text-sm">Email is required</p>
+                  )}
+
+                  <div className="flex justify-start items-center">
+                    <div className="">
+                      <BiKey className="text-3xl text-slate-500"></BiKey>
+                    </div>
+                    <input
+                      className="outline-none flex-1 border-b-2 p-2 bg-transparent focus:border-orange-400 transition-all  duration-200"
+                      type={showPassword ? "password" : "text"}
+                      placeholder="Enter Password"
+                      {...register("password", {
+                        required: true,
+                        minLength: 6,
+                        maxLength: 20,
+                        pattern:
+                          /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                      })}
+                    />
+
+                    <span
+                      className="absolute top-[255PX] right-12 link link-hover"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <FaEyeSlash></FaEyeSlash>
+                      ) : (
+                        <FaEye></FaEye>
+                      )}
+                    </span>
+                  </div>
+                  {errors.password?.type === "required" && (
+                    <p className="text-red-600 text-sm">Password is required</p>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <p className="text-red-600 text-sm">
+                      Password must be 6 characters
+                    </p>
+                  )}
+                  {errors.password?.type === "maxLength" && (
+                    <p className="text-red-600 text-sm">
+                      Password must be less than 20 characters
+                    </p>
+                  )}
+                  {errors.password?.type === "pattern" && (
+                    <p className="text-red-600 text-sm">
+                      Password must have one Uppercase one lower case, one
+                      number and one special character.
+                    </p>
+                  )}
+                  <div className=" p-1 flex gap-3 -mt-4">
+                    {registerError && (
+                      <p className="text-red-700 text-sm ">{registerError}</p>
+                    )}
+                  </div>
+
+                  <input
+                    type="submit"
+                    value="Register Now"
+                    className="button"
+                  />
+                  <div className="flex gap-2 justify-center">
+                    Already have an account? Please
+                    <Link to="/login">
+                      <p className=" btn-link">Login</p>
+                    </Link>
+                    now.
+                  </div>
+                </form>
+                <div className="divider ">Continue With</div>
                 <button
                   onClick={handleGoogleSignIn}
-                  className="button w-full flex justify-between items-center cursor-pointer "
+                  className="button w-full flex justify-center items-center gap-5 cursor-pointer "
                 >
                   Log in With Google
                   <FcGoogle className="w-8 h-6" />
                 </button>
               </div>
-            </div>
-            {/* <Social></Social> */}
-            <div className="lottie  flex-1 mx-20">
-              <Lottie
-                animationData={registrationAnimation}
-                loop={true}
-              ></Lottie>
+              {/* <Social></Social> */}
+              <div className="lottie  flex-1 mx-20">
+                <Lottie
+                  animationData={registrationAnimation}
+                  loop={false}
+                ></Lottie>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
