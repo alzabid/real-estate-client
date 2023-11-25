@@ -10,11 +10,12 @@ import registrationAnimation from "../assets/registrationAnimation.json";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const axiosPublic = useAxiosPublic();
   const [registerError, setRegisterError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   const { createUser, handleUpdateProfile, signInWithGoogle, logOut } =
@@ -23,27 +24,38 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
+
+    // create user
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
         handleUpdateProfile(data.name, data.photoURL)
           .then(() => {
             Swal.fire({
-              position: "middle",
+              position: "center",
               icon: "success",
               title: "You Successfully Create an Account !",
               showConfirmButton: false,
               timer: 1500,
             });
-            logOut()
-              .then(() => {
-                navigate("/login");
-              })
-              .catch((error) => console.error(error));
+            logOut();
+            navigate("/login");
+            // send user data to DB
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              photoURL: data.photoURL,
+              password: data.password,
+            };
+            axiosPublic.post("/user", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user added");
+              }
+            });
           })
           .catch((error) => console.error(error));
       })
@@ -51,6 +63,7 @@ const Register = () => {
         setRegisterError(error.message);
       });
   };
+
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
@@ -63,6 +76,15 @@ const Register = () => {
           timer: 1500,
         });
         navigate(location?.state ? location?.state : "/");
+
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          photoURL: result.user?.photoURL,
+        };
+        axiosPublic.post("/user", userInfo).then((res) => {
+          console.log(res.data);
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -77,7 +99,7 @@ const Register = () => {
 
       <div className=" bg-[url(img/bg.png)] bg-contain bg container">
         <div className=" bg-white bg-opacity-90 min-h-screen">
-          <div className="w-11/12 mx-auto py-10 m-5 p-5 ">
+          <div className="w-11/12 mx-auto py-10 ">
             <div className="title mt-5">
               <Title>Join with Us</Title>
             </div>
@@ -210,7 +232,7 @@ const Register = () => {
                 </button>
               </div>
               {/* <Social></Social> */}
-              <div className="lottie  flex-1 mx-20">
+              <div className="lottie flex-1 lg:mx-20">
                 <Lottie
                   animationData={registrationAnimation}
                   loop={false}

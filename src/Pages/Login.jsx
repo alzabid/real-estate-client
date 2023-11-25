@@ -6,71 +6,82 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { BiEnvelope, BiKey } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import Lottie from "lottie-react";
-import loginAnimation from "../assets/loginAnimation.json"
+import loginAnimation from "../assets/loginAnimation.json";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
-
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Login = () => {
-     const { signInUser, signInWithGoogle } = useContext(AuthContext);
-     const location = useLocation();
-     const navigate = useNavigate();
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+  const [showPassword, setShowPassword] = useState(true);
 
-     const [showPassword, setShowPassword] = useState(true);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-     const handleLogin = (e) => {
-       e.preventDefault();
-       const email = e.target.email.value;
-       const password = e.target.password.value;
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        e.target.reset();
+        Swal.fire({
+          position: "middle",
+          icon: "success",
+          title: "You successfully login!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Error!",
+          text: "Invalid Email or Password !",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+        console.error(error);
+      });
+  };
 
-       signInUser(email, password)
-         .then((result) => {
-           console.log(result.user);
-           e.target.reset();
-           Swal.fire({
-             position: "middle",
-             icon: "success",
-             title: "You successfully login!",
-             showConfirmButton: false,
-             timer: 1500,
-           });
-           navigate(location?.state ? location?.state : "/");
-         })
-           .catch((error) => {
-             Swal.fire({
-               title: "Error!",
-               text: "Invalid Email or Password !",
-               icon: "error",
-               confirmButtonText: "OK",
-             });
-           console.error(error);
-         });
-     };
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "You successfully login!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(location?.state ? location?.state : "/");
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          photoURL: result.user?.photoURL,
+        };
+        axiosPublic.post("/user", userInfo).then((res) => {
+          console.log(res.data);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-     const handleGoogleSignIn = () => {
-       signInWithGoogle()
-         .then((result) => {
-           console.log(result.user);
-            Swal.fire({
-              position: "middle",
-              icon: "success",
-              title: "You successfully login!",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-           navigate(location?.state ? location?.state : "/");
-         })
-         .catch((error) => {
-           console.error(error);
-         });
-     };
-    return (
+  return (
+    <>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
+
       <div className=" bg-[url(/img/bg2.png)] bg-contain bg container ">
-        <Helmet>
-          <title>Login</title>
-        </Helmet>
         <div className=" bg-white bg-opacity-90 min-h-screen">
-          <div className="w-11/12 mx-auto py-10 m-5 p-5  ">
+          <div className="w-11/12 mx-auto py-10  ">
             <div className="title mt-5">
               <Title>Login Now</Title>
             </div>
@@ -144,14 +155,15 @@ const Login = () => {
                 </button>
               </div>
               {/* <Social></Social> */}
-              <div className="flex-1 mx-20">
+              <div className="flex-1 lg:mx-20">
                 <Lottie animationData={loginAnimation} loop={true}></Lottie>
               </div>
             </div>
           </div>
         </div>
       </div>
-    );
+    </>
+  );
 };
 
 export default Login;

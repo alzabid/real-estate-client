@@ -46,6 +46,17 @@ const Navbar = () => {
           <li className="nav-item">
             <NavLink
               exact
+              to="/dashboard"
+              activeClassName="active"
+              className="nav-links"
+              onClick={handleClick}
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              exact
               to="/register"
               activeClassName="active"
               className="nav-links"

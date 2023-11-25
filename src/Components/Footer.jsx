@@ -5,8 +5,8 @@ const Footer = () => {
   return (
     <footer className="footer bg-[#1f5156] text-white p-10">
       <div>
-        <div className="flex gap-1 items-center">
-          <img className="w-12" src="/img/fav.png" alt="" />
+        <div className="flex gap-1 items-end">
+          <img className="w-10" src="/img/fav.png" alt="" />
           <Link to="/" className="">
             <p className="text-secondary text-2xl">Real Estate</p>
           </Link>
