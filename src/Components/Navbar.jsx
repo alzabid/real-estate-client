@@ -32,28 +32,35 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              to="/about"
-              activeClassName="active"
-              className="nav-links"
-              onClick={handleClick}
-            >
-              About
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              to="/dashboard"
-              activeClassName="active"
-              className="nav-links"
-              onClick={handleClick}
-            >
-              Dashboard
-            </NavLink>
-          </li>
+
+          {user && (
+            <>
+              
+              <li className="nav-item">
+                <NavLink
+                  exact
+                  to="/properties"
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleClick}
+                >
+                  Properties
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  exact
+                  to="/dashboard/users"
+                  activeClassName="active"
+                  className="nav-links"
+                  onClick={handleClick}
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+            </>
+          )}
+
           <li className="nav-item">
             <NavLink
               exact

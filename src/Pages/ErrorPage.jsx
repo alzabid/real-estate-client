@@ -1,14 +1,14 @@
-import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
-import Error from "../assets/404.json"
+// import Lottie from "lottie-react";
+// import Error from "../assets/404.json"
 
 
 const ErrorPage = () => {
     return (
       <div className=" max-w-7xl mx-auto">
         <div className=" h-[80vh] flex flex-col justify-center items-center">
-          <Lottie animationData={Error} loop={true}></Lottie>
-          {/* <img src="/img/404.jpg" alt="" /> */}
+          {/* <Lottie animationData={Error} loop={true}></Lottie> */}
+          <img src="/img/404.png" alt="" />
           <h2>
             
           </h2>

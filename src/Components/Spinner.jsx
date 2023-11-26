@@ -1,14 +1,14 @@
 import Lottie from "lottie-react";
 import loading from "../assets/loading.json";
 
-const Loader = () => {
+const Spinner = () => {
     return (
       <div>
-        <div className="lottie">
+        <div className="lottie w-24 md:w-32">
           <Lottie animationData={loading} loop={true}></Lottie>
         </div>
       </div>
     );
 };
 
-export default Loader;
+export default Spinner;
