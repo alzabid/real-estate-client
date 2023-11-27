@@ -70,7 +70,7 @@ const Register = () => {
       .then((result) => {
         console.log(result.user);
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "success",
           title: "You successfully login !",
           showConfirmButton: false,

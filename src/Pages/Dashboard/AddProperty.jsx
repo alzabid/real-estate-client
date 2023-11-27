@@ -1,10 +1,49 @@
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Providers/AuthProvider";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
 const AddProperty = () => {
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+
+    const propertyInfo = {
+      agent_email: user?.email,
+      agent_name: data.agent_name,
+      agent_photoURL: data.agent_photoURL,
+      title: data.title,
+      location: data.location,
+      price: data.price,
+      photoURL: data.photoURL,
+      details: data.details,
+    };
+    axiosSecure.post("/property", propertyInfo).then((res) => {
+      console.log(res.data);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "You successfully login !",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+  };
+
   return (
     <div className="bg-[#F8F8F8] px-6 md:px-10 lg:px-52 py-10">
       <h1 className="text-3xl text-center  font-extrabold mb-5">
         Add Property
       </h1>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {/* row 0 */}
         <div className="md:flex gap-4 md:mb-8">
           <div className="form-control md:w-1/2">
@@ -17,6 +56,7 @@ const AddProperty = () => {
               name="agent_name"
               placeholder="Agent Name"
               className="input input-bordered w-full"
+              {...register("agent_name", { required: true })}
             />
           </div>
           <div className="form-control md:w-1/2">
@@ -25,10 +65,11 @@ const AddProperty = () => {
             </label>
 
             <input
-              type="number"
-              name="agent_image"
+              type="text"
+              name="agent_photoURL"
               placeholder="Agent Image"
               className="input input-bordered w-full"
+              {...register("agent_photoURL", { required: true })}
             />
           </div>
         </div>
@@ -44,6 +85,7 @@ const AddProperty = () => {
               name="title"
               placeholder="Property Title"
               className="input input-bordered w-full"
+              {...register("title", { required: true })}
             />
           </div>
           <div className="form-control md:w-1/2">
@@ -56,6 +98,7 @@ const AddProperty = () => {
               name="location"
               placeholder="Property Location"
               className="input input-bordered w-full"
+              {...register("location", { required: true })}
             />
           </div>
         </div>
@@ -67,10 +110,11 @@ const AddProperty = () => {
             </label>
 
             <input
-              type="text"
+              type="number"
               name="price"
               placeholder="Price Range"
               className="input input-bordered w-full"
+              {...register("price", { required: true })}
             />
           </div>
           <div className="form-control md:w-1/2">
@@ -80,9 +124,10 @@ const AddProperty = () => {
             <label className="input-group">
               <input
                 type="text"
-                name="image"
+                name="photoURL"
                 placeholder="Property Image URL"
                 className="input input-bordered w-full"
+                {...register("photoURL", { required: true })}
               />
             </label>
           </div>
@@ -99,6 +144,7 @@ const AddProperty = () => {
               name="details"
               placeholder="Property Details"
               className="input input-bordered w-full"
+              {...register("details", { required: true })}
             />
           </div>
         </div>

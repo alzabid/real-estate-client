@@ -8,9 +8,9 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Properties from "../Pages/Properties";
 import AddProperties from "../Pages/Dashboard/AddProperty";
-import Card from "../Components/Card";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import UpdateProperty from "../Pages/Dashboard/UpdateProperty";
+import Details from "../Pages/Details";
 
 
 const Router = createBrowserRouter([
@@ -30,6 +30,16 @@ const Router = createBrowserRouter([
             <Properties></Properties>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/health/property/${params.id}`),
       },
 
       {
@@ -57,15 +67,12 @@ const Router = createBrowserRouter([
       },
       {
         path: "update",
-        element: <UpdateProperty></UpdateProperty>
+        element: <UpdateProperty></UpdateProperty>,
       },
-      {
-        path: "card",
-        element: <Card />,
-      },
+
       {
         path: "users",
-        element: <ManageUsers></ManageUsers>
+        element: <ManageUsers></ManageUsers>,
       },
     ],
   },
