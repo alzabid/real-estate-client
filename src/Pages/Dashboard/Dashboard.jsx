@@ -52,9 +52,9 @@ const Dashboard = () => {
 
                 <span className="mx-4 font-medium">Dashboard</span>
               </a>
-              <Link to="/dashboard/users"
+              <Link
+                to="/dashboard/users"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-               
               >
                 <FaUsers />
 
@@ -68,13 +68,14 @@ const Dashboard = () => {
                 <FaRegUser />
                 <span className="mx-4 font-medium">My Profile</span>
               </a>
-              <a
+              <Link
+                to="/dashboard/wishlist"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                 href="#"
               >
                 <FaList />
                 <span className="mx-4 font-medium">My Wishlist</span>
-              </a>
+              </Link>
               <a
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                 href="#"
@@ -141,7 +142,7 @@ const Dashboard = () => {
       </div>
       <div className="flex-1">
         <div>
-          <Outlet/>
+          <Outlet />
         </div>
       </div>
     </div>

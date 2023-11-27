@@ -21,7 +21,7 @@ const Properties = () => {
               src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
               alt="Album"
             />
-            <img src={item.photoURL} alt="" />
+            {/* <img src={item.photoURL} alt="" /> */}
           </figure>
           <div className="card-body">
             <h2 className="card-title">

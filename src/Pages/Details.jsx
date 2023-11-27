@@ -1,7 +1,7 @@
 // import { useQuery } from "@tanstack/react-query";
 // import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -18,53 +18,58 @@ const Details = () => {
   // });
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-  const [property] = useLoaderData();
+    const [property] = useLoaderData();
+    // console.log(property);
     const {
       _id,
     agent_name,
-    agent_photo_URL,
+    agent_photoURL,
     title,
     photoURL,
     location,
-    Price,
+    price,
     details,
     status,
-  } = property;
+    } = property;
+    
 
   console.log(
     agent_name,
-    agent_photo_URL,
+    agent_photoURL,
     title,
     photoURL,
     location,
-    Price,
+    price,
     details,
     status
   );
-  const Wishlist = {
-    property_id: _id,
-    email: user.email,
-    agent_name,
-    agent_photo_URL,
-    title,
-    photoURL,
-    location,
-    Price,
-    details,
-    status,
-  };
-  axiosSecure.post("/wishlist", Wishlist).then((res) => {
-      console.log(res.data);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: `${title} added to your cart`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      refetch();
-   
-  });
+
+
+    const handleWishlist = () => {
+        const Wishlist = {
+          property_id: _id,
+          email: user.email,
+          agent_name,
+          agent_photoURL,
+          title,
+          photoURL,
+          location,
+          price,
+          details,
+          status,
+        };
+        axiosSecure.post("/wishlist", Wishlist).then((res) => {
+          console.log(res.data);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${title} added to your cart`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });      
+    }
+  
 
   return (
     <div className="container py-10 px-10">
@@ -79,7 +84,12 @@ const Details = () => {
           <h2 className="card-title">{agent_name}</h2>
           <p>Click the button to listen on Spotiwhy app.</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Add to Wishlist</button>
+            <Link to="">
+              <button className="btn btn-secondary text-black">Give Review </button>
+            </Link>
+            
+              <button onClick={handleWishlist} className="btn btn-primary">Add to Wishlist</button>
+            
           </div>
         </div>
       </div>

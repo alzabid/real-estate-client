@@ -11,6 +11,7 @@ import AddProperties from "../Pages/Dashboard/AddProperty";
 import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import UpdateProperty from "../Pages/Dashboard/UpdateProperty";
 import Details from "../Pages/Details";
+import Wishlist from "../Pages/Dashboard/Wishlist";
 
 
 const Router = createBrowserRouter([
@@ -73,6 +74,10 @@ const Router = createBrowserRouter([
       {
         path: "users",
         element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist></Wishlist>
       },
     ],
   },
