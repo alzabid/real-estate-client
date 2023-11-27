@@ -12,6 +12,7 @@ import ManageUsers from "../Pages/Dashboard/ManageUsers";
 import UpdateProperty from "../Pages/Dashboard/UpdateProperty";
 import Details from "../Pages/Details";
 import Wishlist from "../Pages/Dashboard/Wishlist";
+import MakeOffer from "../Pages/Dashboard/MakeOffer";
 
 
 const Router = createBrowserRouter([
@@ -39,8 +40,6 @@ const Router = createBrowserRouter([
             <Details></Details>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/health/property/${params.id}`),
       },
 
       {
@@ -77,7 +76,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "wishlist",
-        element: <Wishlist></Wishlist>
+        element: <Wishlist></Wishlist>,
+      },
+      {
+        path: "makeOffer",
+        element: <MakeOffer></MakeOffer>
       },
     ],
   },
