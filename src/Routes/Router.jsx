@@ -15,6 +15,8 @@ import Wishlist from "../Pages/Dashboard/Wishlist";
 import MakeOffer from "../Pages/Dashboard/MakeOffer";
 import MyReviews from "../Pages/Dashboard/MyReviews";
 import MyProfile from "../Pages/Dashboard/MyProfile";
+import AllProperty from "../Pages/Dashboard/AllProperty";
+import AgentProperties from "../Pages/Dashboard/AgentProperties";
 
 const Router = createBrowserRouter([
   {
@@ -39,6 +41,14 @@ const Router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Details></Details>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProperty/>
           </PrivateRoute>
         ),
       },
@@ -67,8 +77,12 @@ const Router = createBrowserRouter([
         element: <AddProperties></AddProperties>,
       },
       {
-        path: "update",
-        element: <UpdateProperty></UpdateProperty>,
+        path: "property",
+        element: <AllProperty></AllProperty>,
+      },
+      {
+        path: "agentproperty",
+        element: <AgentProperties></AgentProperties>
       },
 
       {

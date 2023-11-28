@@ -3,6 +3,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Spinner from "../Components/Spinner";
+import { MdVerified } from "react-icons/md";
 
 const Properties = () => {
   const [search, setSearch] = useState("");
@@ -77,7 +78,14 @@ const Properties = () => {
                 <div className="card-body">
                   <h2 className="card-title">
                     {item.title}
-                    <div className="badge badge-secondary">{item.status}</div>
+                    {item?.status === "Verified" ? (
+                      <div className="badge badge-info">
+                        {item.status} <MdVerified />{" "}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    
                   </h2>
                   <p>Location: {item.location}</p>
                   <p>Price: {item.price}</p>

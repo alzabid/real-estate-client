@@ -2,19 +2,49 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { MdAutoDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const MyReviews = () => {
-  const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
+  const { user } = useContext(AuthContext);
 
-  const { data: reviews = [] } = useQuery({
+  const { data: reviews = [], refetch } = useQuery({
     queryKey: ["reviews", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/review?email=${user.email}`);
       return res.data;
     },
   });
-  console.log(reviews);
+  // console.log(reviews);
+ 
+
+  
+  
+
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/review/${_id}`).then((res) => {
+          console.log(res.data);
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your Review Item has been deleted",
+            icon: "success",
+          });
+        });
+      }
+    });
+  };
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -35,12 +65,22 @@ const MyReviews = () => {
             <h2 className="mt-2 text-xl font-semibold text-black  md:mt-0">
               {item.title}
             </h2>
-
             <p className="mt-2 text-sm text-gray-600 ">
-              {item.review}
+              Agent Name: {item.agent_name}
             </p>
 
-            <div className="flex justify-end mt-4">
+            <p className="mt-2 text-sm text-gray-600 ">{item.review}</p>
+
+            <p className="mt-2 text-sm text-gray-600 ">{item.time}</p>
+
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={() => handleDelete(item._id)}
+                className="btn btn-sm btn-warning"
+              >
+                Delete
+                <MdAutoDelete />
+              </button>
               <p className="text-lg font-medium text-primary">
                 {item.user_name}
               </p>

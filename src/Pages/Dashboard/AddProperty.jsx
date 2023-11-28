@@ -17,7 +17,7 @@ const AddProperty = () => {
     console.log(data);
 
     const propertyInfo = {
-      agent_email: user?.email,
+      email: user?.email,
       agent_name: data.agent_name,
       agent_photoURL: data.agent_photoURL,
       title: data.title,
@@ -39,7 +39,7 @@ const AddProperty = () => {
   };
 
   return (
-    <div className="bg-[#F8F8F8] px-6 md:px-10 lg:px-52 py-10">
+    <div className="px-6 md:px-10 lg:px-52 py-10">
       <h1 className="text-3xl text-center  font-extrabold mb-5">
         Add Property
       </h1>

@@ -71,6 +71,18 @@ const Details = () => {
       });
     });
   };
+  const dateObject = new Date(Date.now());
+  const year = dateObject.getFullYear();
+  const month = dateObject.getMonth() + 1;
+  const day = dateObject.getDate();
+  const hours = dateObject.getHours();
+  const minutes = dateObject.getMinutes();
+  const seconds = dateObject.getSeconds();
+  const formattedDateTime = `${year}-${month < 10 ? "0" : ""}${month}-${
+    day < 10 ? "0" : ""
+  }${day} ${hours}h:${minutes}m:${seconds}s`;
+
+
   const handleReview = () => {
     const reviewInfo = {
       property_id: _id,
@@ -79,7 +91,8 @@ const Details = () => {
       user_photoURL: user.photoURL,
       review: review,
       title,
-      time: Date.now(),
+      agent_name,
+      time: formattedDateTime,
     };
     axiosSecure.post("/review", reviewInfo).then((res) => {
       console.log(res.data);

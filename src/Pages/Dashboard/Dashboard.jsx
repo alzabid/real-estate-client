@@ -1,7 +1,13 @@
 // import { useContext } from "react";
 // import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { FaCartPlus, FaList, FaRegUser, FaUsers } from "react-icons/fa";
+import {
+  FaCartPlus,
+  FaList,
+  FaRegUser,
+  FaUsers,
+  FaRegClipboard,
+} from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
@@ -47,7 +53,6 @@ const Dashboard = () => {
               </Link>
 
               <Link
-                // to={`/dashboard/profile/:${user.email}`}
                 to="/dashboard/profile"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
               >
@@ -74,20 +79,28 @@ const Dashboard = () => {
               </a>
 
               <Link
+                to="/dashboard/property"
+                className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+              >
+                <FaRegClipboard />
+
+                <span className="mx-4 font-medium">All Properties</span>
+              </Link>
+              <Link
+                to="/dashboard/agentproperty"
+                className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+              >
+                <FaRegClipboard />
+
+                <span className="mx-4 font-medium">Agent Properties</span>
+              </Link>
+              <Link
                 to="/dashboard/add"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
               >
                 <IoIosAddCircleOutline />
 
                 <span className="mx-4 font-medium">Add Property</span>
-              </Link>
-              <Link
-                to="/dashboard/update"
-                className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-              >
-                <IoIosAddCircleOutline />
-
-                <span className="mx-4 font-medium">Update Property</span>
               </Link>
 
               <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
@@ -119,7 +132,7 @@ const Dashboard = () => {
           </div>
         </aside>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 bg-[#F8F8F8]">
         <div className="">
           <Outlet />
         </div>
