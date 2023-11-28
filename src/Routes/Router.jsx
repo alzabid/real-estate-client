@@ -13,7 +13,8 @@ import UpdateProperty from "../Pages/Dashboard/UpdateProperty";
 import Details from "../Pages/Details";
 import Wishlist from "../Pages/Dashboard/Wishlist";
 import MakeOffer from "../Pages/Dashboard/MakeOffer";
-
+import MyReviews from "../Pages/Dashboard/MyReviews";
+import MyProfile from "../Pages/Dashboard/MyProfile";
 
 const Router = createBrowserRouter([
   {
@@ -75,12 +76,20 @@ const Router = createBrowserRouter([
         element: <ManageUsers></ManageUsers>,
       },
       {
+        path: "profile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
         path: "wishlist",
         element: <Wishlist></Wishlist>,
       },
       {
+        path: "myreviews",
+        element: <MyReviews></MyReviews>,
+      },
+      {
         path: "makeOffer",
-        element: <MakeOffer></MakeOffer>
+        element: <MakeOffer></MakeOffer>,
       },
     ],
   },

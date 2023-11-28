@@ -1,19 +1,12 @@
-import { useContext } from "react";
+// import { useContext } from "react";
+// import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { AuthContext } from "../../Providers/AuthProvider";
-import {
-  FaCartPlus,
-  FaList,
-  FaRegClipboard,
-  FaRegUser,
-  FaUsers,
-} from "react-icons/fa";
+import { FaCartPlus, FaList, FaRegUser, FaUsers } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
-
 const Dashboard = () => {
-  const { user } = useContext(AuthContext);
+  // const { user } = useContext(AuthContext);
   return (
     <div className="flex">
       <div>
@@ -28,7 +21,7 @@ const Dashboard = () => {
             <span className="text-2xl ">Real Estate</span>
           </NavLink>
 
-          <div className="flex flex-col items-center mt-6 -mx-2">
+          {/* <div className="flex flex-col items-center mt-6 -mx-2">
             <img
               className="object-cover  w-16 h-16 mx-2 rounded-full"
               src={user.photoURL}
@@ -40,18 +33,10 @@ const Dashboard = () => {
             <p className="mx-2 mt-1 text-sm font-medium text-white">
               {user.email}
             </p>
-          </div>
+          </div> */}
 
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav className="-mx-3 space-y-3 ">
-              <a
-                className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                href="#"
-              >
-                <FaRegClipboard />
-
-                <span className="mx-4 font-medium">Dashboard</span>
-              </a>
               <Link
                 to="/dashboard/users"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
@@ -61,34 +46,31 @@ const Dashboard = () => {
                 <span className="mx-4 font-medium"> Manage Users</span>
               </Link>
 
-              <a
+              <Link
+                // to={`/dashboard/profile/:${user.email}`}
+                to="/dashboard/profile"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                href="#"
               >
                 <FaRegUser />
                 <span className="mx-4 font-medium">My Profile</span>
-              </a>
+              </Link>
               <Link
                 to="/dashboard/wishlist"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                href="#"
               >
                 <FaList />
                 <span className="mx-4 font-medium">My Wishlist</span>
               </Link>
-              <a
+              <Link
+                to="/dashboard/myreviews"
                 className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                href="#"
-              >
-                <FaCartPlus />
-                <span className="mx-4 font-medium">Property Bought</span>
-              </a>
-              <a
-                className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                href="#"
               >
                 <MdOutlineRateReview />
                 <span className="mx-4 font-medium">My Reviews</span>
+              </Link>
+              <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
+                <FaCartPlus />
+                <span className="mx-4 font-medium">Property Bought</span>
               </a>
 
               <Link
@@ -108,10 +90,7 @@ const Dashboard = () => {
                 <span className="mx-4 font-medium">Update Property</span>
               </Link>
 
-              <a
-                className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                href="#"
-              >
+              <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
                 <svg
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
@@ -141,7 +120,7 @@ const Dashboard = () => {
         </aside>
       </div>
       <div className="flex-1">
-        <div className="py-10">
+        <div className="">
           <Outlet />
         </div>
       </div>

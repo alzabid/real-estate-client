@@ -74,7 +74,7 @@ const Details = () => {
   const handleReview = () => {
     const reviewInfo = {
       property_id: _id,
-      user_email: user.email,
+      email: user.email,
       user_name: user.displayName,
       user_photoURL: user.photoURL,
       review: review,
@@ -146,7 +146,7 @@ const Details = () => {
                     <div className="modal-action">
                       <form method="dialog">
                           <input
-                            onClick={handleReview}
+                          onClick={handleReview}
                           type="submit"
                           value="Submit"
                           className="btn btn-sm md:btn-md btn-primary"
