@@ -4,9 +4,11 @@ import { RiMenuAddLine } from "react-icons/ri";
 import { CgMenuMotion } from "react-icons/cg";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import useUser from "../Hooks/useUser";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [item] = useUser();
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -35,7 +37,6 @@ const Navbar = () => {
 
           {user && (
             <>
-              
               <li className="nav-item">
                 <NavLink
                   exact
@@ -50,7 +51,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <NavLink
                   exact
-                  to="/dashboard/users"
+                  to="/dashboard/profile"
                   activeClassName="active"
                   className="nav-links"
                   onClick={handleClick}
@@ -82,7 +83,7 @@ const Navbar = () => {
                     className={`avatar ${user ? "online" : "offline"} md:ml-3`}
                   >
                     <div className=" w-12 rounded-full">
-                      <img src={user.photoURL} />
+                      <img src={item?.photoURL} />
                     </div>
                   </label>
                   <ul
@@ -90,10 +91,10 @@ const Navbar = () => {
                     className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <p>{user.displayName}</p>
+                      <p>{item?.name}</p>
                     </li>
                     <li>
-                      <p>{user.email}</p>
+                      <p>{item?.email}</p>
                     </li>
                     <li>
                       <a onClick={logOut}>Logout</a>

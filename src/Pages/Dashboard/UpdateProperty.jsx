@@ -28,9 +28,8 @@ const UpdateProperty = () => {
 
   const {
     _id,
-    agent_email,
+    email,
     agent_name,
-    agent_photoURL,
     title,
     photoURL,
     location,
@@ -42,14 +41,14 @@ const UpdateProperty = () => {
     console.log(data);
 
     const updateInfo = {
-      agent_email,
-      agent_name: data.agent_name,
-      agent_photoURL: data.agent_photoURL,
-      title: data.title,
-      location: data.location,
-      price: data.price,
-      photoURL: data.photoURL,
-      details: data.details,
+      // email,
+      // agent_name: data.agent_name,
+      // agent_photoURL: data.agent_photoURL,
+      title: data.title || title,
+      location: data.location||location,
+      price: data.price||price,
+      photoURL: data.photoURL || photoURL ,
+      details: data.details || details,
     };
     axiosSecure.patch(`/property/${_id}`, updateInfo).then((res) => {
       console.log(res.data);
@@ -81,6 +80,7 @@ const UpdateProperty = () => {
               name="agent_name"
               placeholder="Agent Name"
               defaultValue={agent_name}
+              readOnly
               className="input input-bordered w-full"
               {...register("agent_name")}
             />
@@ -92,11 +92,12 @@ const UpdateProperty = () => {
 
             <input
               type="text"
-              name="agent_photoURL"
-              placeholder="Agent Image"
-              defaultValue={agent_photoURL}
+              name="email"
+              placeholder="Agent Email"
+              defaultValue={email}
+              readOnly
               className="input input-bordered w-full"
-              {...register("agent_photoURL")}
+              {...register("email")}
             />
           </div>
         </div>

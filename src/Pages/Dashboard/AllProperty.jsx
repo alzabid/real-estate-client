@@ -17,17 +17,19 @@ const AllProperty = () => {
   console.log(Property);
 
   const handleMakeVerify = (item) => {
-    axiosSecure.patch(`/property/${item._id}`,{status:"Verified"}).then((res) => {
-      console.log(res.data);
-      refetch();
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: `${item.title} is Verified !`,
-        showConfirmButton: false,
-        timer: 1500,
+    axiosSecure
+      .patch(`/property/${item._id}`, { status: "Verified" })
+      .then((res) => {
+        console.log(res.data);
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `${item.title} is Verified !`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
-    });
   };
   const handleMakeReject = (item) => {
     axiosSecure
@@ -56,12 +58,12 @@ const AllProperty = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/wishlist/${_id}`).then((res) => {
+        axiosSecure.delete(`/property/${_id}`).then((res) => {
           console.log(res.data);
           refetch();
           Swal.fire({
             title: "Deleted!",
-            text: "Your Wishlist Item has been deleted.",
+            text: "Your property has been deleted.",
             icon: "success",
           });
         });
@@ -73,15 +75,10 @@ const AllProperty = () => {
       {Property.map((item) => (
         <div
           key={item._id}
-          className="card card-side max-w-3xl bg-base-100 shadow-xl"
+          className="card card-side h-[350px] bg-base-100 shadow-xl"
         >
           <figure>
-            <img
-              className="w-[300px]"
-              src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-              alt="Album"
-            />
-            {/* <img src={item.photoURL} alt="" /> */}
+            <img className="w-[500px] h-full" src={item.photoURL} alt="" />
             <button
               onClick={() => handleDelete(item._id)}
               className="absolute top-0 right-0  btn-circle "
@@ -115,9 +112,9 @@ const AllProperty = () => {
               <p>{item.agent_name}</p>
             </div>
             <div className="card-actions justify-center">
-              <Link className="" to={`/update/${item._id}`}>
+              {/* <Link className="" to={`/update/${item._id}`}>
                 <button className="btn btn-sm btn-secondary">Update</button>
-              </Link>
+              </Link> */}
 
               {item.status === "Verified" ? (
                 <button disabled className="btn btn-sm btn-info">

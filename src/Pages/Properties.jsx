@@ -19,7 +19,12 @@ const Properties = () => {
         `/property?search=${search}&sort=${selectedSorting}`
       );
       setIsLoading(false);
-      return res.data;
+    
+      const verifiedProperties = res.data.filter(
+        (property) => property.status === "Verified"
+      );
+
+      return verifiedProperties;
     },
   });
   const handleSearch = (e) => {
@@ -69,11 +74,7 @@ const Properties = () => {
             {property.map((item) => (
               <div key={item._id} className="card bg-base-100 shadow-xl">
                 <figure>
-                  <img
-                    src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                    alt="Album"
-                  />
-                  {/* <img src={item.photoURL} alt="" /> */}
+                  <img className="h-[250px]" src={item.photoURL} alt="" />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">
@@ -85,7 +86,6 @@ const Properties = () => {
                     ) : (
                       ""
                     )}
-                    
                   </h2>
                   <p>Location: {item.location}</p>
                   <p>Price: {item.price}</p>
@@ -95,7 +95,10 @@ const Properties = () => {
                         <img src={item.agent_photoURL} />
                       </div>
                     </div>
-                    <p>{item.agent_name}</p>
+                    <p className="text-primary">
+                    
+                      Agent: <span className="text-black">{item.agent_name}</span>
+                    </p>
                   </div>
                   <div className="card-actions justify-center">
                     <Link className="w-full" to={`/details/${item._id}`}>

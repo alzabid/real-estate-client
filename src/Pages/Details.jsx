@@ -5,6 +5,9 @@ import { AuthContext } from "../Providers/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import Spinner from "../Components/Spinner";
+import PropertyReviews from "../Components/PropertyReviews";
+import { MdVerified } from "react-icons/md";
+import Title from "../Components/Title";
 
 const Details = () => {
   const axiosSecure = useAxiosSecure();
@@ -12,6 +15,8 @@ const Details = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState();
   const [review, setReview] = useState("")
+
+   
 
   const { data: property = [] } = useQuery({
     queryKey: ["property", id],
@@ -23,7 +28,7 @@ const Details = () => {
     },
   });
 
-  console.log(property);
+  // console.log(property);
   const {
     _id,
     agent_name,
@@ -36,16 +41,20 @@ const Details = () => {
     status,
   } = property;
 
-  console.log(
-    agent_name,
-    agent_photoURL,
-    title,
-    photoURL,
-    location,
-    price,
-    details,
-    status
-  );
+
+  const { data: reviews = [], } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/review");
+      const propertiesReview = res.data.filter(
+        (reviews) => reviews.property_id === `${_id}`
+      );
+      // refetch()
+
+      return propertiesReview;
+    },
+  });
+  console.log(reviews);
 
   const handleWishlist = () => {
     const Wishlist = {
@@ -114,16 +123,24 @@ const Details = () => {
         </div>
       ) : (
         <div className="max-w-6xl mx-auto px-6 py-10">
-          <div className="card  md:card-side bg-base-100 shadow-xl">
+          <div className="card  md:card-side bg-base-100 shadow-xl mb-12">
             <figure>
-              <img
-                src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
-                alt="Album"
-              />
+              <img className="w-[600px]" src={photoURL} />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{agent_name}</h2>
-              <p>Click the button to listen on Spotiwhy app.</p>
+              <div className="flex justify-end -mt-5 mr-6">
+                {status === "Verified" ? (
+                  <div className="badge badge-info">
+                    {status} <MdVerified />
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+              <h2 className="card-title">{title}</h2>
+              <h2 className="card-title"> Agent: {agent_name}</h2>
+              <h2 className="card-title"> Price: {price}</h2>
+              <p>{details}</p>
               <div className="card-actions justify-end">
                 <button
                   className="btn btn-sm md:btn-md btn-secondary text-black"
@@ -158,7 +175,7 @@ const Details = () => {
 
                     <div className="modal-action">
                       <form method="dialog">
-                          <input
+                        <input
                           onClick={handleReview}
                           type="submit"
                           value="Submit"
@@ -177,6 +194,12 @@ const Details = () => {
                 </button>
               </div>
             </div>
+            </div>
+            <Title>Reviews</Title>
+          <div className="grid grid-cols-2 gap-6">
+            {reviews.map((element, index) => (
+              <PropertyReviews key={index} element={element} />
+            ))}
           </div>
         </div>
       )}

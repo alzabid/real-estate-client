@@ -18,8 +18,8 @@ const AddProperty = () => {
 
     const propertyInfo = {
       email: user?.email,
-      agent_name: data.agent_name,
-      agent_photoURL: data.agent_photoURL,
+      agent_name: user?.displayName,
+      agent_photoURL: user?.photoURL,
       title: data.title,
       location: data.location,
       price: data.price,
@@ -55,21 +55,25 @@ const AddProperty = () => {
               type="text"
               name="agent_name"
               placeholder="Agent Name"
+              defaultValue={user.displayName}
+              readOnly
               className="input input-bordered w-full"
               {...register("agent_name", { required: true })}
             />
           </div>
           <div className="form-control md:w-1/2">
             <label className="label">
-              <span className="label-text">Agent Image</span>
+              <span className="label-text">Agent Email</span>
             </label>
 
             <input
               type="text"
-              name="agent_photoURL"
-              placeholder="Agent Image"
+              name="email"
+              placeholder="Agent Email"
+              defaultValue={user.email}
+              readOnly
               className="input input-bordered w-full"
-              {...register("agent_photoURL", { required: true })}
+              {...register("email", { required: true })}
             />
           </div>
         </div>

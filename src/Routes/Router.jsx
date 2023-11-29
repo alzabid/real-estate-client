@@ -17,6 +17,7 @@ import MyReviews from "../Pages/Dashboard/MyReviews";
 import MyProfile from "../Pages/Dashboard/MyProfile";
 import AllProperty from "../Pages/Dashboard/AllProperty";
 import AgentProperties from "../Pages/Dashboard/AgentProperties";
+import ManageReviews from "../Pages/Dashboard/ManageReviews";
 
 const Router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ const Router = createBrowserRouter([
       {
         path: "myreviews",
         element: <MyReviews></MyReviews>,
+      },
+      {
+        path: "allreviews",
+        element: <ManageReviews></ManageReviews>
       },
       {
         path: "makeOffer",
