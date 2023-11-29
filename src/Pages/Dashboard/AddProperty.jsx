@@ -31,7 +31,7 @@ const AddProperty = () => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "You successfully login !",
+        title: "You successfully added !",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -114,7 +114,7 @@ const AddProperty = () => {
             </label>
 
             <input
-              type="number"
+              type="text"
               name="price"
               placeholder="Price Range"
               className="input input-bordered w-full"

@@ -18,6 +18,8 @@ import MyProfile from "../Pages/Dashboard/MyProfile";
 import AllProperty from "../Pages/Dashboard/AllProperty";
 import AgentProperties from "../Pages/Dashboard/AgentProperties";
 import ManageReviews from "../Pages/Dashboard/ManageReviews";
+import PorpertyBought from "../Pages/Dashboard/PorpertyBought";
+
 
 const Router = createBrowserRouter([
   {
@@ -49,7 +51,15 @@ const Router = createBrowserRouter([
         path: "/update/:id",
         element: (
           <PrivateRoute>
-            <UpdateProperty/>
+            <UpdateProperty />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "makeOffer/:id",
+        element: (
+          <PrivateRoute>
+            <MakeOffer></MakeOffer>
           </PrivateRoute>
         ),
       },
@@ -83,7 +93,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "agentproperty",
-        element: <AgentProperties></AgentProperties>
+        element: <AgentProperties></AgentProperties>,
+      },
+      {
+        path: "",
+        element: <AgentProperties></AgentProperties>,
       },
 
       {
@@ -103,13 +117,14 @@ const Router = createBrowserRouter([
         element: <MyReviews></MyReviews>,
       },
       {
-        path: "allreviews",
-        element: <ManageReviews></ManageReviews>
+        path: "bought",
+        element: <PorpertyBought></PorpertyBought>
       },
       {
-        path: "makeOffer",
-        element: <MakeOffer></MakeOffer>,
+        path: "allreviews",
+        element: <ManageReviews></ManageReviews>,
       },
+      
     ],
   },
 ]);

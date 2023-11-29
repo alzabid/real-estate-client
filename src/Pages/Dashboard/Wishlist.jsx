@@ -99,11 +99,11 @@ const Wishlist = () => {
               </p>
             </div>
             <div className="card-actions justify-end">
-              {/* <Link className="" to={`/details/${item.property_id}`}>
+              <Link className="" to={`/details/${item.property_id}`}>
                 <button className="btn btn-primary">Details</button>
-              </Link> */}
-              <Link className="" to="/dashboard/makeOffer">
-                <button className="btn btn-primary">Make an Offer</button>
+              </Link>
+              <Link className="" to={`/makeOffer/${item._id}`}>
+                <button className="btn btn-secondary">Make an Offer</button>
               </Link>
             </div>
           </div>

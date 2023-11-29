@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
     <div className="flex">
       <div>
-        <aside className="flex flex-col w-64 h-full px-4 py-8">
+        <aside className="flex flex-col w-64 bg-primary h-screen px-4 py-8">
           <NavLink
             to="/"
             className="flex justify-center items-end text-secondary"
@@ -33,61 +33,7 @@ const Dashboard = () => {
             <nav className="-mx-3 space-y-3 ">
               {/* {item?.role !== "Admin" ? <></>:item?.role !== "Agent" ?<></>:<></>} */}
 
-              {item?.role === "User" ? (
-                <>
-                  <Link
-                    to="/dashboard/profile"
-                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                  >
-                    <FaRegUser />
-                    <span className="mx-4 font-medium">My Profile</span>
-                  </Link>
-                  <Link
-                    to="/dashboard/wishlist"
-                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                  >
-                    <FaList />
-                    <span className="mx-4 font-medium">My Wishlist</span>
-                  </Link>
-                  <Link
-                    to="/dashboard/myreviews"
-                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                  >
-                    <MdOutlineRateReview />
-                    <span className="mx-4 font-medium">My Reviews</span>
-                  </Link>
-                  <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
-                    <FaCartPlus />
-                    <span className="mx-4 font-medium">Property Bought</span>
-                  </a>
-                </>
-              ) : item?.role === "Agent" ? (
-                <>
-                  <Link
-                    to="/dashboard/profile"
-                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                  >
-                    <FaRegUser />
-                    <span className="mx-4 font-medium">My Profile</span>
-                  </Link>
-                  <Link
-                    to="/dashboard/agentproperty"
-                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                  >
-                    <FaRegClipboard />
-
-                    <span className="mx-4 font-medium">My Properties</span>
-                  </Link>
-                  <Link
-                    to="/dashboard/add"
-                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                  >
-                    <IoIosAddCircleOutline />
-
-                    <span className="mx-4 font-medium">Add Property</span>
-                  </Link>
-                </>
-              ) : (
+              {item?.role === "Admin" ? (
                 <>
                   <Link
                     to="/dashboard/profile"
@@ -120,12 +66,72 @@ const Dashboard = () => {
                     <span className="mx-4 font-medium">Manage Properties</span>
                   </Link>
                 </>
-              )}
+              ) : item?.role === "Agent" ? (
+                <>
+                  <Link
+                    to="/dashboard/profile"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <FaRegUser />
+                    <span className="mx-4 font-medium">My Profile</span>
+                  </Link>
+                  <Link
+                    to="/dashboard/agentproperty"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <FaRegClipboard />
 
-              {/* <a className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700">
-                <IoSettingsOutline />
-                <span className="mx-4 font-medium">Settings</span>
-              </a> */}
+                    <span className="mx-4 font-medium">My Properties</span>
+                  </Link>
+                  <Link
+                    to="/dashboard/add"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <IoIosAddCircleOutline />
+
+                    <span className="mx-4 font-medium">Add Property</span>
+                  </Link>
+                  <Link
+                    to="/dashboard/request"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <IoIosAddCircleOutline />
+
+                    <span className="mx-4 font-medium">Requested Property</span>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/dashboard/profile"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <FaRegUser />
+                    <span className="mx-4 font-medium">My Profile</span>
+                  </Link>
+                  <Link
+                    to="/dashboard/wishlist"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <FaList />
+                    <span className="mx-4 font-medium">My Wishlist</span>
+                  </Link>
+                  <Link
+                    to="/dashboard/myreviews"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <MdOutlineRateReview />
+                    <span className="mx-4 font-medium">My Reviews</span>
+                  </Link>
+                  <Link
+                    to="/dashboard/bought"
+                    className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                  >
+                    <FaCartPlus />
+                    <span className="mx-4 font-medium">Property Bought</span>
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
         </aside>

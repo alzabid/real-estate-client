@@ -87,7 +87,7 @@ const UpdateProperty = () => {
           </div>
           <div className="form-control md:w-1/2">
             <label className="label">
-              <span className="label-text">Agent Image</span>
+              <span className="label-text">Agent Email</span>
             </label>
 
             <input
@@ -140,7 +140,7 @@ const UpdateProperty = () => {
             </label>
 
             <input
-              type="number"
+              type="text"
               name="price"
               placeholder="Price Range"
               defaultValue={price}

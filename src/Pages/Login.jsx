@@ -80,7 +80,7 @@ const Login = () => {
         <title>Login</title>
       </Helmet>
 
-      <div className=" bg-[url(/img/bg2.png)] bg-contain bg container ">
+      <div className=" bg-[url(/img/bg2.png)] bg-contain bg ">
         <div className=" bg-white bg-opacity-90 min-h-screen">
           <div className="w-11/12 mx-auto py-10  ">
             <div className="title mt-5">
@@ -91,7 +91,7 @@ const Login = () => {
               <div className="login-for flex-1">
                 <form
                   onSubmit={handleLogin}
-                  className="flex flex-col gap-8 p-5 backdrop-blur-sm bg-white  bg-opacity-5 shadow-lg rounded-lg"
+                  className="flex flex-col gap-8 p-5 backdrop-blur-sm bg-white  bg-opacity-30 shadow-lg rounded-lg"
                 >
                   <div className="flex justify-start items-center">
                     <div className="">

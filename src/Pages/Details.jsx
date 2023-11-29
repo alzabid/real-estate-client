@@ -14,9 +14,7 @@ const Details = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState();
-  const [review, setReview] = useState("")
-
-   
+  const [review, setReview] = useState("");
 
   const { data: property = [] } = useQuery({
     queryKey: ["property", id],
@@ -31,6 +29,7 @@ const Details = () => {
   // console.log(property);
   const {
     _id,
+    email,
     agent_name,
     agent_photoURL,
     title,
@@ -41,16 +40,15 @@ const Details = () => {
     status,
   } = property;
 
-
-  const { data: reviews = [], } = useQuery({
+  const { data: reviews = [] } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
+      setIsLoading(true);
       const res = await axiosSecure.get("/review");
       const propertiesReview = res.data.filter(
         (reviews) => reviews.property_id === `${_id}`
       );
-      // refetch()
-
+      setIsLoading(false);
       return propertiesReview;
     },
   });
@@ -61,6 +59,7 @@ const Details = () => {
       property_id: _id,
       email: user.email,
       agent_name,
+      agent_email: email,
       agent_photoURL,
       title,
       photoURL,
@@ -80,6 +79,7 @@ const Details = () => {
       });
     });
   };
+
   const dateObject = new Date(Date.now());
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
@@ -89,8 +89,7 @@ const Details = () => {
   const seconds = dateObject.getSeconds();
   const formattedDateTime = `${year}-${month < 10 ? "0" : ""}${month}-${
     day < 10 ? "0" : ""
-  }${day} ${hours}h:${minutes}m:${seconds}s`;
-
+  }${day} ${hours}:${minutes}:${seconds}`;
 
   const handleReview = () => {
     const reviewInfo = {
@@ -123,12 +122,12 @@ const Details = () => {
         </div>
       ) : (
         <div className="max-w-6xl mx-auto px-6 py-10">
-          <div className="card  md:card-side bg-base-100 shadow-xl mb-12">
+          <div className="card  md:card-side bg-base-100 shadow-xl border-t-2 mb-12">
             <figure>
               <img className="w-[600px]" src={photoURL} />
             </figure>
             <div className="card-body">
-              <div className="flex justify-end -mt-5 mr-6">
+              <div className="flex justify-end -mt-5 -mr-2">
                 {status === "Verified" ? (
                   <div className="badge badge-info">
                     {status} <MdVerified />
@@ -194,8 +193,8 @@ const Details = () => {
                 </button>
               </div>
             </div>
-            </div>
-            <Title>Reviews</Title>
+          </div>
+          <Title>Reviews</Title>
           <div className="grid grid-cols-2 gap-6">
             {reviews.map((element, index) => (
               <PropertyReviews key={index} element={element} />
