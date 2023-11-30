@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import useUser from "../../Hooks/useUser";
 
 
@@ -95,7 +96,7 @@ const Dashboard = () => {
                     to="/dashboard/request"
                     className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                   >
-                    <IoIosAddCircleOutline />
+                    <VscGitPullRequestGoToChanges />
 
                     <span className="mx-4 font-medium">Requested Property</span>
                   </Link>

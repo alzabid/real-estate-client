@@ -34,7 +34,7 @@ const PorpertyBought = () => {
                   {item.status} <FaSkullCrossbones />
                 </div>
               ) : (
-                ""
+                <div className="badge badge-success">{item.status}</div>
               )}
             </div>
             <h2 className="card-title">{item.title}</h2>
@@ -47,17 +47,15 @@ const PorpertyBought = () => {
             </div>
             <div className="card-actions justify-center">
               {item.status === "Accepted" ? (
-                <Link className="w-full">
+                <Link to={`/payment/${item._id}`} className="w-full">
                   <button className="btn btn-primary w-full">Pay Now</button>
                 </Link>
               ) : (
-                <>
-                  <Link className="w-full">
-                    <button disabled className="btn btn-primary w-full">
-                      Pay Now
-                    </button>
-                  </Link>
-                </>
+                <Link className="w-full">
+                  <button disabled className="btn btn-primary w-full">
+                    Pay Now
+                  </button>
+                </Link>
               )}
             </div>
           </div>

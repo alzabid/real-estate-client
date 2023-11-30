@@ -19,7 +19,8 @@ import AllProperty from "../Pages/Dashboard/AllProperty";
 import AgentProperties from "../Pages/Dashboard/AgentProperties";
 import ManageReviews from "../Pages/Dashboard/ManageReviews";
 import PorpertyBought from "../Pages/Dashboard/PorpertyBought";
-
+import RequestedProperties from "../Pages/Dashboard/RequestedProperties";
+import Payment from "../Pages/Payment";
 
 const Router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const Router = createBrowserRouter([
       },
 
       {
+        path: "payment/:id",
+        element: <Payment></Payment>,
+      },
+      {
         path: "login",
         element: <Login></Login>,
       },
@@ -96,8 +101,8 @@ const Router = createBrowserRouter([
         element: <AgentProperties></AgentProperties>,
       },
       {
-        path: "",
-        element: <AgentProperties></AgentProperties>,
+        path: "request",
+        element: <RequestedProperties></RequestedProperties>,
       },
 
       {
@@ -118,13 +123,16 @@ const Router = createBrowserRouter([
       },
       {
         path: "bought",
-        element: <PorpertyBought></PorpertyBought>
+        element: <PorpertyBought></PorpertyBought>,
       },
       {
         path: "allreviews",
         element: <ManageReviews></ManageReviews>,
       },
-      
+      // {
+      //   path: "payment/:id",
+      //   element: <Payment></Payment>,
+      // },
     ],
   },
 ]);

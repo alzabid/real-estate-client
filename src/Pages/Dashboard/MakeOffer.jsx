@@ -5,9 +5,6 @@ import { useForm } from "react-hook-form";
 import useUser from "../../Hooks/useUser";
 import Swal from "sweetalert2";
 
-
-
-
 const MakeOffer = () => {
   const axiosSecure = useAxiosSecure();
   const [item] = useUser();
@@ -23,22 +20,21 @@ const MakeOffer = () => {
     },
   });
 
-   const { agent_email, agent_name, title, location, price, photoURL } = wishlist;
+  const { agent_email, agent_name, title, location, price, photoURL } =
+    wishlist;
 
   // console.log(wishlist);
 
-
-
   //  console.log(typeof(price));
+  console.log(price);
 
-  // const [minValueString, maxValueString] = rangeString.split("-");
-  // const minValue = parseInt(minValueString, 10);
-  // const maxValue = parseInt(maxValueString, 10);
+  const rangeString = price;
+  const [minValueString, maxValueString] = rangeString.split("-");
+  const minValue = parseInt(minValueString, 10);
+  const maxValue = parseInt(maxValueString, 10);
 
-  // console.log("Minimum Value:", minValue); // Output: 10000
-  // console.log("Maximum Value:", maxValue); // Output: 20000
-
-   
+  console.log("Minimum Value:", minValue);
+  console.log("Maximum Value:", maxValue);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -56,7 +52,6 @@ const MakeOffer = () => {
       date: data.date,
     };
 
-    
     if (data.price < minValue || data.price > maxValue) {
       Swal.fire({
         icon: "error",
@@ -75,7 +70,6 @@ const MakeOffer = () => {
         });
       });
     }
-    
   };
 
   return (

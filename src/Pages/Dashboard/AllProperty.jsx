@@ -112,9 +112,6 @@ const AllProperty = () => {
               <p>{item.agent_name}</p>
             </div>
             <div className="card-actions justify-center">
-              {/* <Link className="" to={`/update/${item._id}`}>
-                <button className="btn btn-sm btn-secondary">Update</button>
-              </Link> */}
 
               {item.status === "Verified" ? (
                 <button disabled className="btn btn-sm btn-info">
