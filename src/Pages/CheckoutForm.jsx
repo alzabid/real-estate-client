@@ -7,8 +7,10 @@ import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { loadStripe } from "@stripe/stripe-js";
 
 const CheckoutFrom = () => {
+   const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_KEY);
   const { user } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
@@ -25,14 +27,15 @@ const CheckoutFrom = () => {
     },
   });
   console.log(offer);
-  const totalPrice = offer.price;
+  const totalPrice = parseInt(offer.price);
+  console.log(totalPrice)
 
   useEffect(() => {
     if (typeof totalPrice === "number" && totalPrice > 0) {
       axiosSecure
         .post("/create-payment-intent", { price: totalPrice })
         .then((res) => {
-          console.log(res.data.clientSecret);
+          console.log(res.data);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -111,7 +114,7 @@ const CheckoutFrom = () => {
         <button
           className="btn rounded-none mt-5"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !stripePromise}
         >
           Pay
         </button>
