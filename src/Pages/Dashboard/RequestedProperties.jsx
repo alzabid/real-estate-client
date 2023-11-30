@@ -82,7 +82,7 @@ const RequestedProperties = () => {
             <p>Buying Date: {item.date}</p>
 
             <div className="card-actions justify-center">
-              {item.status === "Verified" ? (
+              {item.status === "Accepted" ? (
                 <button disabled className="btn btn-sm btn-info">
                   Accepted
                 </button>
@@ -108,7 +108,6 @@ const RequestedProperties = () => {
                   <FaSkullCrossbones />
                 </button>
               )}
-             
             </div>
           </div>
         </div>

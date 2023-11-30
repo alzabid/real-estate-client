@@ -41,7 +41,16 @@ const MyProfile = () => {
           <div className="flex justify-between">
             <h2 className="card-title">{item?.name}</h2>
             {item?.role !== "User" ? (
-              <div className="badge badge-secondary">{item?.role}</div>
+              <>
+                <div className="badge badge-secondary">{item?.role}</div>
+                {item?.status === "Fraud" ? (
+                  <>
+                    <div className="absolute top-2 right-2 badge badge-error text-lg">Fraud</div>
+                  </>
+                ) : (
+                  ""
+                )}
+              </>
             ) : (
               ""
             )}

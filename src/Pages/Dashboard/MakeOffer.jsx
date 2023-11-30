@@ -4,11 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import useUser from "../../Hooks/useUser";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
 
 const MakeOffer = () => {
   const axiosSecure = useAxiosSecure();
   const [item] = useUser();
   const { id } = useParams();
+  const [stringPrice, setStringPrice] = useState("")
 
   const { register, handleSubmit } = useForm();
 
@@ -22,19 +24,23 @@ const MakeOffer = () => {
 
   const { agent_email, agent_name, title, location, price, photoURL } =
     wishlist;
-
-  // console.log(wishlist);
+  
 
   //  console.log(typeof(price));
-  console.log(price);
+  // console.log(price.split("-"));
 
-  const rangeString = price;
-  const [minValueString, maxValueString] = rangeString.split("-");
+  useEffect(() => {
+    setStringPrice(price);
+     
+  }, [price,]);
+
+  const [minValueString, maxValueString] = stringPrice.split("-");
   const minValue = parseInt(minValueString, 10);
   const maxValue = parseInt(maxValueString, 10);
-
   console.log("Minimum Value:", minValue);
   console.log("Maximum Value:", maxValue);
+
+  
 
   const onSubmit = (data) => {
     console.log(data);

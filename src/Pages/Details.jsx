@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
@@ -13,15 +13,14 @@ const Details = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const { id } = useParams();
-  const [isLoading, setIsLoading] = useState();
   const [review, setReview] = useState("");
+ 
 
-  const { data: property = [] } = useQuery({
+  const { data: property = [], isLoading } = useQuery({
     queryKey: ["property", id],
     queryFn: async () => {
-      setIsLoading(true);
       const res = await axiosSecure.get(`/property/${id}`);
-      setIsLoading(false);
+
       return res.data;
     },
   });
@@ -40,19 +39,19 @@ const Details = () => {
     status,
   } = property;
 
-  const { data: reviews = [] } = useQuery({
-    queryKey: ["reviews"],
+  const { data: reviews = [], refetch, isLoading: isReviewLoading } = useQuery({
+    queryKey: ["reviews", _id],
     queryFn: async () => {
-      setIsLoading(true);
       const res = await axiosSecure.get("/review");
       const propertiesReview = res.data.filter(
         (reviews) => reviews.property_id === `${_id}`
       );
-      setIsLoading(false);
+
       return propertiesReview;
     },
   });
   console.log(reviews);
+  
 
   const handleWishlist = () => {
     const Wishlist = {
@@ -104,6 +103,7 @@ const Details = () => {
     };
     axiosSecure.post("/review", reviewInfo).then((res) => {
       console.log(res.data);
+      refetch()
       Swal.fire({
         position: "center",
         icon: "success",
@@ -116,7 +116,7 @@ const Details = () => {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || isReviewLoading ? (
         <div className="h-[80vh] flex items-center justify-center">
           <Spinner />
         </div>

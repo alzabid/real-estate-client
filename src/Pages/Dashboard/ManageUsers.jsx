@@ -38,6 +38,19 @@ const ManageUsers = () => {
       });
     });
   };
+  const handleMakeFraud = (item) => {
+    axiosSecure.patch(`/user/fraud/${item._id}`).then((res) => {
+      console.log(res.data);
+      refetch();
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: `${item.name} is Mark as Fraud!`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+  };
 
   const handleDeleteUser = (item) => {
     Swal.fire({
@@ -51,7 +64,7 @@ const ManageUsers = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/user/${item._id}`).then((res) => {
-           console.log(res.data);
+          console.log(res.data);
           refetch();
           Swal.fire({
             title: "Deleted!",
@@ -113,6 +126,12 @@ const ManageUsers = () => {
                     >
                       Make Role
                     </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                    >
+                      Mark Fraud
+                    </th>
                     {/* 6 */}
                     <th
                       scope="col"
@@ -156,26 +175,56 @@ const ManageUsers = () => {
                       </td>
 
                       <td className=" px-4 py-4 text-sm whitespace-nowrap">
-                        {item.role !== "Admin" ? (
-                          <details className="dropdown dropdown-right dropdown-end">
-                            <summary className="m-1 btn btn-sm">
-                              Make Role
-                            </summary>
-                            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                              <li>
-                                <button onClick={() => handleMakeAdmin(item)}>
-                                  Make Admin
-                                </button>
-                              </li>
-                              <li>
-                                <button onClick={() => handleMakeAgent(item)}>
-                                  Make Agent
-                                </button>
-                              </li>
-                            </ul>
-                          </details>
+                        {item.status === "Fraud" ? (
+                          <summary className="m-1 btn btn-error btn-sm">
+                            Mark Fraud
+                          </summary>
                         ) : (
-                          ""
+                          <>
+                            {item.role !== "Admin" ? (
+                              <details className="dropdown dropdown-right dropdown-end">
+                                <summary className="m-1 btn btn-sm">
+                                  Make Role
+                                </summary>
+                                <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                  <li>
+                                    <button
+                                      onClick={() => handleMakeAdmin(item)}
+                                    >
+                                      Make Admin
+                                    </button>
+                                  </li>
+                                  <li>
+                                    <button
+                                      onClick={() => handleMakeAgent(item)}
+                                    >
+                                      Make Agent
+                                    </button>
+                                  </li>
+                                </ul>
+                              </details>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        )}
+                      </td>
+                      <td>
+                        {item.role === "Agent" ? (
+                          <>
+                            {item.status !== "Fraud" ? (
+                              <summary
+                                onClick={() => handleMakeFraud(item)}
+                                className="m-1 btn btn-sm"
+                              >
+                                Mark Fraud
+                              </summary>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        ) : (
+                          <></>
                         )}
                       </td>
                       <td className=" px-4 py-4 text-sm whitespace-nowrap">
